@@ -10,35 +10,46 @@ void fail(const char* msg) {
 
 typedef struct {
   const size_t dim;
-  const float* data;
+  float* data;
 } Matrix_t;
 
 typedef Matrix_t* SMatrix;
 
-int inputMatrix(float** matrix);
-int allocMatrix(SMatrix* matrix, size_t dim);
+int inputMatrix(SMatrix matrix);
+SMatrix allocMatrix(const size_t dim);
+void freeMatrix(SMatrix matrix);
 
 int main(void) {
   printf("= Two dimension matrix processing. =\n");
 
-  SMatrix matrix;
+  SMatrix matrix = allocMatrix(10);
 
-  allocMatrix(&matrix, 10);
+  if (matrix == NULL) {
+    fail(strerror(errno));
+  }
 
   exit(EXIT_SUCCESS);
 }
 
+int inputMatrix(SMatrix matrix) {
+  return 0;
+}
 
-int allocMatrix(SMatrix* matrix_p, const size_t dim) {
+SMatrix allocMatrix(const size_t dim) {
   const SMatrix matrix = (SMatrix) malloc(sizeof(Matrix_t));
-  const float *data = (float *) calloc(dim * dim, sizeof(float));
+  float *data = (float *) calloc(dim * dim, sizeof(float));
 
   if (matrix == NULL || data == NULL) {
-    fail(strerror(errno));
+    return NULL;
   }
 
   *(size_t *) &matrix->dim = dim;
   matrix->data = data;
 
-  return 0;
+  return matrix;
+}
+
+void freeMatrix(SMatrix matrix) {
+  free(matrix->data);
+  free(matrix);
 }
