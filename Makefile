@@ -1,7 +1,7 @@
-CC = gcc-9
+CC = g++-9
 PROGRAM = matrix
-CFLAGS = -Wall -Wextra -Wpedantic -ggdb -std=gnu++17 -O0
-LDLIBS =
+CFLAGS = -Wall -Wextra -Wpedantic -ggdb -std=gnu++17 -O0 `pkg-config --cflags glib-2.0`
+LDLIBS = `pkg-config --libs glib-2.0`
 
 default: bin/$(PROGRAM)
 
