@@ -14,7 +14,7 @@ void fail(const char* msg) {
 
 typedef struct {
   const gsize dim;
-  float* data;
+  int* data;
 } Matrix_t;
 
 typedef Matrix_t* Matrix;
@@ -48,7 +48,7 @@ int inputMatrix(Matrix matrix) {
   gsize i = 0, j = 0, k = 0;
   do {
     cout << "Input cell ["<< i <<"][" << j << "]"<< endl;
-    inputValue(&matrix->data[k], "Wrong matrix value. Try again.");
+    inputValue(&matrix->data[k], "Wrong matrix value. Try again.\n");
 
     if (j == matrix->dim - 1) {
       i++;
@@ -66,7 +66,7 @@ int inputMatrix(Matrix matrix) {
 
 Matrix allocMatrix(const gsize dim) {
   Matrix matrix = g_new(Matrix_t, 1);
-  float *data = g_new0(float, dim * dim);
+  int *data = g_new0(int, dim * dim);
 
   *(gsize *) &matrix->dim = dim;
   matrix->data = data;
