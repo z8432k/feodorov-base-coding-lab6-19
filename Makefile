@@ -1,4 +1,4 @@
-CC = g++-9
+CC = g++
 PROGRAM = matrix
 CFLAGS = -Wall -Wextra -Wpedantic -ggdb -std=gnu++17 -O0 `pkg-config --cflags glib-2.0`
 LDLIBS = `pkg-config --libs glib-2.0`
