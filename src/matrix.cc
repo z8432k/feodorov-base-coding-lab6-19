@@ -28,8 +28,10 @@ static void inputValue(T *value, const char* errStr);
 
 void printPositiveRows(Matrix matrix);
 void minDiagSum(Matrix matrix);
+void printMatrix(Matrix matrix);
 
-int main(void) {
+    int main(void)
+{
   cout << "= Two dimension matrix processing. =" << endl;
 
   Matrix matrix;
@@ -37,6 +39,8 @@ int main(void) {
   inputMatrix(&matrix);
   printPositiveRows(matrix);
   minDiagSum(matrix);
+
+  printMatrix(matrix);
 
   exit(EXIT_SUCCESS);
 }
@@ -53,7 +57,7 @@ int inputMatrix(Matrix *matrix) {
 
   cout << "Input all matrix values in С style (by rows) one by one and press enter after each." << endl;
 
-  gsize i = 0, j = 0, k = 0;
+  gint i = 0, j = 0, k = 0;
   do {
     cout << "Input cell ["<< i <<"][" << j << "]"<< endl;
     inputValue(&(*matrix)->data[k], "Wrong matrix value. Try again.\n");
@@ -165,4 +169,16 @@ void minDiagSum(Matrix matrix) {
   }
 
   cout << endl << "Minimum diag sum: " << minimum << endl;
+}
+
+void printMatrix(Matrix matrix) {
+  printf("Matrix: \n");
+
+  for (size_t i = 0; i < matrix->dim; i++) {
+    for (size_t j = 0; j < matrix->dim; j++) {
+      gsize idx = matrix->dim * i + j;
+      printf("\t%d", matrix->data[idx]);
+    }
+    printf("\n");
+  }
 }
