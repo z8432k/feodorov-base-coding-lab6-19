@@ -42,10 +42,12 @@ int main(void) {
 }
 
 int inputMatrix(Matrix *matrix) {
-  gsize dim;
+  gint dim;
 
   cout << "Input matrix dimension: ";
   inputValue(&dim, "Wrong dimension value. Try again.");
+
+  dim = abs(dim);
 
   *matrix = allocMatrix(dim);
 
